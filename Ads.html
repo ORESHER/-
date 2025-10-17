@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Реклама — Дворик</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #2e7d32;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: white;
+            color: #2e7d32;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            header h1 {
+                font-size: 24px;
+                margin: 0;
+            }
+
+        .nav-buttons button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .nav-buttons button:hover {
+                background-color: #1b5e20;
+            }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .ad-box {
+            background: linear-gradient(135deg, #2e7d32, #81c784);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease;
+        }
+
+            .ad-box h2 {
+                margin-bottom: 20px;
+                font-size: 28px;
+            }
+
+            .ad-box p {
+                font-size: 18px;
+                margin-bottom: 25px;
+                line-height: 1.5;
+            }
+
+        .contact {
+            background-color: white;
+            color: #2e7d32;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            background-color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📢 Реклама — Дворик</h1>
+        <div class="nav-buttons">
+            <button onclick="window.location.href='catalog.html'">⬅️ В каталог</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="ad-box">
+            <h2>Здесь может быть ваша реклама</h2>
+            <p>
+                Рекламируйте свои товары и услуги на сайте «Дворик»!
+                Мы предлагаем выгодные условия размещения и широкую аудиторию покупателей.
+            </p>
+            <div class="contact">
+                📧 Связаться с нами: <br>
+                <strong>arsenstepanov46@gmail.com</strong>
+            </div>
+        </div>
+    </main>
+
+    <footer>© 2025 Магазин «Дворик» — Рекламное сотрудничество приветствуется</footer>
+
+</body>
+</html>

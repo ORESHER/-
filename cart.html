@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина — Дворик</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f5f5;
+            color: #2e7d32;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 30px;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #2e7d32;
+            color: white;
+        }
+
+        td img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            button:hover {
+                background-color: #1b5e20;
+            }
+
+        .summary {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .delivery-form {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+            .delivery-form h3 {
+                text-align: center;
+                color: #2e7d32;
+            }
+
+            .delivery-form label {
+                display: block;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+
+            .delivery-form input, .delivery-form select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                margin-top: 5px;
+                font-size: 15px;
+            }
+
+            .delivery-form button {
+                display: block;
+                margin: 20px auto 0;
+                background-color: #2e7d32;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-size: 16px;
+            }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background-color: white;
+            color: #2e7d32;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 18px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 1000;
+            width: 400px;
+            max-width: 90%;
+        }
+
+            .popup.show {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            .popup h3 {
+                margin-top: 0;
+                color: #1b5e20;
+            }
+
+            .popup ul {
+                text-align: left;
+                padding-left: 20px;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🛒 Корзина</h1>
+        <button onclick="window.location.href='catalog.html'">⬅️ Назад в каталог</button>
+    </header>
+
+    <main>
+        <div id="cart-container"></div>
+        <div class="summary" id="total"></div>
+        <div class="checkout">
+            <button onclick="showDeliveryForm()">💳 Оформить покупку</button>
+        </div>
+
+        <form id="deliveryForm" class="delivery-form" onsubmit="submitOrder(event)">
+            <h3>🚚 Доставка заказа</h3>
+            <label>Имя:</label>
+            <input type="text" id="name" required>
+            <label>Телефон:</label>
+            <input type="tel" id="phone" required placeholder="+7 900 123-45-67">
+            <label>Адрес доставки:</label>
+            <input type="text" id="address" required>
+            <label>Способ доставки:</label>
+            <select id="deliveryType" required>
+                <option value="Самовывоз">Самовывоз</option>
+                <option value="Доставка на дом">Доставка на дом</option>
+            </select>
+            <label>Способ оплаты:</label>
+            <select id="paymentType" required>
+                <option value="Наличные">💵 Наличные при получении</option>
+                <option value="Карта">💳 Банковская карта при получении</option>
+                <option value="Онлайн">🌐 Онлайн-оплата</option>
+            </select>
+            <button type="submit">✅ Подтвердить заказ</button>
+        </form>
+    </main>
+
+    <footer>© 2025 Магазин «Дворик» — Спасибо, что выбираете нас!</footer>
+    <div id="popup" class="popup"></div>
+
+    <script>
+        function loadCart() {
+            const container = document.getElementById("cart-container");
+            const totalElement = document.getElementById("total");
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            container.innerHTML = "";
+            if (cart.length === 0) {
+                container.innerHTML = "<p>Ваша корзина пуста.</p>";
+                totalElement.textContent = "";
+                document.querySelector(".checkout").style.display = "none";
+                return;
+            }
+            document.querySelector(".checkout").style.display = "block";
+            let table = `<table><tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Сумма</th><th></th></tr>`;
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * (item.quantity || 1);
+                total += itemTotal;
+                table += `
+                  <tr>
+                    <td><img src="${item.image}" alt="${item.name}"> ${item.name}</td>
+                    <td>${item.price} ₽</td>
+                    <td>
+                      <button onclick="changeQuantity(${index}, -1)">−</button>
+                      ${item.quantity}
+                      <button onclick="changeQuantity(${index}, 1)">+</button>
+                    </td>
+                    <td>${itemTotal} ₽</td>
+                    <td><button onclick="removeItem(${index})">🗑️</button></td>
+                  </tr>`;
+            });
+            table += "</table>";
+            container.innerHTML = table;
+            totalElement.textContent = `Итого: ${total} ₽`;
+        }
+
+        function changeQuantity(i, d) {
+            let c = JSON.parse(localStorage.getItem("cart")) || [];
+            c[i].quantity += d;
+            if (c[i].quantity <= 0) c.splice(i, 1);
+            localStorage.setItem("cart", JSON.stringify(c));
+            loadCart();
+        }
+
+        function removeItem(i) {
+            let c = JSON.parse(localStorage.getItem("cart")) || [];
+            c.splice(i, 1);
+            localStorage.setItem("cart", JSON.stringify(c));
+            loadCart();
+        }
+
+        function showDeliveryForm() {
+            const f = document.getElementById("deliveryForm");
+            f.style.display = f.style.display === "block" ? "none" : "block";
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const addr = document.getElementById("address").value.trim();
+            const deliv = document.getElementById("deliveryType").value;
+            const pay = document.getElementById("paymentType").value;
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            if (!cart.length) return;
+            let total = 0;
+            let itemsHTML = "<ul>";
+            cart.forEach(i => {
+                total += i.price * (i.quantity || 1);
+                itemsHTML += `<li>${i.name} — ${i.quantity} шт. × ${i.price} ₽</li>`;
+            });
+            itemsHTML += "</ul>";
+            const summary = `
+                <h3>✅ Спасибо за покупку, ${name}!</h3>
+                <p>Мы скоро свяжемся с вами по телефону <b>${phone}</b>.</p>
+                <p><b>Адрес:</b> ${addr}</p>
+                <p><b>Доставка:</b> ${deliv}</p>
+                <p><b>Оплата:</b> ${pay}</p>
+                <h4>🛍 Ваш заказ:</h4>${itemsHTML}
+                <h4>Итого: ${total} ₽</h4>`;
+            localStorage.removeItem("cart");
+            document.getElementById("deliveryForm").style.display = "none";
+            loadCart();
+            showPopup(summary);
+        }
+
+        function showPopup(html) {
+            const p = document.getElementById("popup");
+            p.innerHTML = html;
+            p.classList.add("show");
+            setTimeout(() => p.classList.remove("show"), 7000);
+        }
+
+        loadCart();
+    </script>
+    <script>
+        if (!localStorage.getItem("loggedIn")) {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

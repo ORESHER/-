@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Дворик</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(to bottom, #e8f5e9, #fff);
+            color: #2e7d32;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #1b5e20;
+            }
+
+        a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>Вход</h2>
+        <input type="text" id="login" placeholder="Введите логин" required>
+        <input type="password" id="password" placeholder="Введите пароль" required>
+        <button onclick="login()">Войти</button>
+        <p>Нет аккаунта? <a href="register.html">Регистрация</a></p>
+    </div>
+
+    <script>
+        function login() {
+            const login = document.getElementById('login').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            const user = users.find(u => u.login === login && u.password === password);
+            if (user) {
+                localStorage.setItem("loggedIn", login);
+                window.location.href = "index.html";
+            } else {
+                alert("Неверный логин или пароль!");
+            }
+        }
+    </script>
+</body>
+</html>

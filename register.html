@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Дворик</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(to bottom, #e8f5e9, #fff);
+            color: #2e7d32;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .register-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 320px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #1b5e20;
+            }
+
+        a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-box">
+        <h2>Регистрация</h2>
+        <input type="text" id="login" placeholder="Введите логин" required>
+        <input type="password" id="password" placeholder="Введите пароль" required>
+        <button onclick="register()">Зарегистрироваться</button>
+        <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+    </div>
+
+    <script>
+        function register() {
+            const login = document.getElementById('login').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!login || !password) {
+                alert("Введите логин и пароль!");
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            if (users.find(u => u.login === login)) {
+                alert("Такой пользователь уже существует!");
+                return;
+            }
+
+            users.push({ login, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert("Регистрация успешна!");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

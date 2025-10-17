@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог — Дворик</title>
+    <style>
+      
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f5f5;
+            color: #2e7d32;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            animation: fadeInOpacity 0.6s ease forwards;
+        }
+
+        @keyframes fadeInOpacity {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+       
+        .site {
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideFade 0.9s ease 0.05s forwards;
+        }
+
+        @keyframes slideFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ad-banner {
+            background: linear-gradient(90deg, #2e7d32, #81c784, #2e7d32);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto 40px;
+            width: 80%;
+            cursor: pointer;
+            user-select: none;
+            animation: moveGradient 4s linear infinite;
+            background-size: 300% 300%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+            .ad-banner:hover {
+                transform: scale(1.03);
+            }
+
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+            header h1 {
+                font-size: 24px;
+                margin: 0;
+            }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+            .nav-buttons button {
+                background-color: #2e7d32;
+                color: #fff;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                .nav-buttons button:hover {
+                    background-color: #1b5e20;
+                    transform: scale(1.05);
+                }
+
+        main {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .categories {
+            margin-bottom: 20px;
+        }
+
+            .categories button {
+                background-color: #2e7d32;
+                color: #fff;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 20px;
+                margin: 5px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                .categories button:hover {
+                    background-color: #1b5e20;
+                    transform: scale(1.05);
+                }
+
+        #search {
+            width: 50%;
+            max-width: 400px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 25px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+            #search:focus {
+                outline: none;
+                border-color: #2e7d32;
+                box-shadow: 0 0 6px rgba(46,125,50,0.4);
+            }
+
+        .catalog {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInCards 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInCards {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 230px;
+            padding: 15px;
+            transition: 0.3s;
+            animation: fadeInCard 0.6s ease both;
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #2e7d32;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .card button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .card button:hover {
+                background-color: #1b5e20;
+                transform: scale(1.05);
+            }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            opacity: 0;
+            animation: slideFade 1s ease 0.5s forwards;
+        }
+
+      
+        .toast {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            font-size: 16px;
+            z-index: 9999;
+            transform: translateY(20px);
+        }
+
+            .toast.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+    </style>
+</head>
+<body>
+    
+    <div class="site">
+        <header>
+            <h1>🏠 Каталог — Дворик</h1>
+            <div class="nav-buttons">
+                <button onclick="logout()">🚪 Выйти</button>
+                <button onclick="window.location.href='partners.html'">🤝 Сотрудничество</button>
+                <button onclick="window.location.href='about.html'">ℹ️ О нас</button>
+                <button onclick="window.location.href='contacts.html'">📞 Контакты</button>
+                <button onclick="window.location.href='cart.html'">🛒 Корзина</button>
+            </div>
+        </header>
+
+        <main>
+            <input type="text" id="search" placeholder="🔍 Поиск товаров..." oninput="searchProducts(this.value)">
+            <div class="categories">
+                <button onclick="filterCategory('all')">📦 Все</button>
+                <button onclick="filterCategory('cleaning')">🧽 Уборка</button>
+                <button onclick="filterCategory('chemicals')">🧴 Моющие средства</button>
+                <button onclick="filterCategory('food')">🥛 Натуральные продукты</button>
+                <button onclick="filterCategory('foodProducts')">🍟 Продукты</button>
+
+              
+                <div class="ad-banner" onclick="window.location.href='Ads.html'">📢 Здесь может быть ваша реклама</div>
+            </div>
+
+            <div id="product-container" class="catalog"></div>
+        </main>
+
+        <footer>© 2025 Магазин «Дворик» — Спасибо, что выбираете нас!</footer>
+    </div>
+
+   
+    <div id="toast" class="toast">✅ Товар добавлен в корзину</div>
+
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            window.location.href = "login.html";
+        }
+
+
+        const products = {
+            cleaning: [
+                { name: "Щетка для пола с мягким ворсом", price: 300, image: "images/70603.jpg" },
+                { name: "Вантуз для прочистки труб", price: 250, image: "images/957_5890.jpg" },
+                { name: "Ведро пластмассовое 10л", price: 350, image: "images/thumb300.jpg" },
+                { name: "Тряпки для уборки", price: 300, image: "images/431895.jpg" },
+                { name: "Прочные перчатки для мытья посуды", price: 200, image: "images/94563391c510eaa874dc46233ecdfb77.jpg" },
+                { name: "Швабра с врашающимся наконечником", price: 400, image: "images/9376254820402_1744117265444.jpg" }
+            ],
+            chemicals: [
+                { name: "Средство для мытья полов", price: 290, image: "images/thumb300 (1).jpg" },
+                { name: "Domestos Сила 7", price: 380, image: "images/domestos-domestos-ekspert-sila-7-sila-shtorma-chernyy-moyuschee-sredstvo-dlya-santeh_41206376.jpg" },
+                { name: "Fairy средство для посуды", price: 160, image: "images/Sredstvo-dlya-posudy-Fairy-300x300.jpg" },
+                { name: "Гель для душа Nivea", price: 250, image: "images/niveya-gel-dlya-dusha-kislorodnyj-koktejl-art.84021-250ml-300x300.jpg" },
+                { name: "Миф стиральный 2кг", price: 270, image: "images/60ygm62aathrftv6hl0mzxr0g5l0pbl8.jpg" },
+                { name: "Мыло хозяйственное", price: 80, image: "images/S52db98eaafb14fbe8af09adbb7bc8605R.jpg_300x300.jpg" }
+            ],
+            food: [
+                { name: "Кефир 'Молочный дождик' 3.2%", price: 89, image: "images/4607055310854.jpeg" },
+                { name: "Блины 'Морозко' с ветчиной", price: 170, image: "images/i.jpg" },
+                { name: "Быырпах традиционный 1л", price: 150, image: "images/i-no-bg-preview (carve.photos).png" },
+                { name: "Пельмени 'Хоту-Ас'", price: 300, image: "images/ZVx8SxcWA0hT210B2qZVA.jpg" },
+                { name: "Колбаса 'хоту-Ас'", price: 400, image: "images/M.jpg" },
+                { name: "Масло сливочное 'Молочный дождик' 2.5%", price: 300, image: "images/M_height.jpg" },
+                { name: "Йогурт 'Нежный 5%'", price: 80, image: "images/sokom-300x300.jpg" }
+            ],
+            foodProducts: [
+                { name: "Чипсы Lay’s Лосось", price: 120, image: "images/chipsy-kartofelnye-lay-s-riflenye-slivochnyi-losos-140-g.jpg" },
+                { name: "Чипсы Lay’s Ребрышки гриль", price: 80, image: "images/hdxcic5n7lm9t42thri2ci0lwi4j1mb9.jpg" },
+                { name: "Чипсы Lay’s Зелёный лук", price: 180, image: "images/M_height (1).jpg" },
+                { name: "Снеки лапша острая", price: 90, image: "images/300x0_bhssempvortqcnlb_jpg_3124.jpg" },
+                { name: "Кола газированная 2л", price: 250, image: "images/Ad55a276fc4194f4d8281e2aae296f54bi.jpg_300x300.jpg" }
+            ]
+        };
+
+        let currentCategory = "all";
+
+        function createCard(product) {
+            return `
+            <div class="card">
+              <img src="${product.image}" alt="${product.name}">
+              <h3>${product.name}</h3>
+              <p>${product.price} ₽</p>
+              <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Добавить</button>
+            </div>`;
+        }
+
+        function renderCategory(category) {
+            currentCategory = category;
+            const container = document.getElementById("product-container");
+            container.innerHTML = "";
+            let allProducts = [];
+            if (category === "all") Object.values(products).forEach(arr => allProducts = allProducts.concat(arr));
+            else allProducts = products[category] || [];
+            allProducts.forEach(prod => container.innerHTML += createCard(prod));
+        }
+
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const existing = cart.find(item => item.name === name);
+            if (existing) existing.quantity++;
+            else cart.push({ name, price, image, quantity: 1 });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            showToast("✅ Товар добавлен в корзину");
+        }
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            playPop(); 
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        function playPop() {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+            osc.stop(audioCtx.currentTime + 0.15);
+        }
+
+        function filterCategory(category) {
+            document.getElementById("search").value = "";
+            renderCategory(category);
+        }
+
+        function searchProducts(value) {
+            const container = document.getElementById("product-container");
+            const term = value.trim().toLowerCase();
+            container.innerHTML = "";
+            let allProducts = [];
+            if (currentCategory === "all") Object.values(products).forEach(arr => allProducts = allProducts.concat(arr));
+            else allProducts = products[currentCategory] || [];
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term));
+            if (filtered.length === 0) container.innerHTML = "<p>Товары не найдены.</p>";
+            else filtered.forEach(p => container.innerHTML += createCard(p));
+        }
+
+        renderCategory("all");
+
+        if (!localStorage.getItem("loggedIn")) window.location.href = "login.html";
+    </script>
+</body>
+</html>

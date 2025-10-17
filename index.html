@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная — Дворик</title>
+    <style>
+       
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(-45deg, #a8e6cf, #dcedc1, #ffd3b6, #ffaaa5);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        
+        .circle {
+            position: absolute;
+            bottom: -150px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: floatUp 20s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-1200px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+       
+        header {
+            padding: 60px 0 10px;
+            opacity: 0;
+            transform: translateY(-30px);
+            animation: fadeIn 2s ease forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header img {
+            width: 520px; 
+            border-radius: 25px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 2s ease forwards 0.5s;
+        }
+
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #1b5e20;
+            font-size: 42px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeText 2s ease forwards 1s;
+        }
+
+        p {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeText 2s ease forwards 1.5s;
+        }
+
+        @keyframes fadeText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            background-color: #2e7d32;
+            color: white;
+            padding: 16px 36px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            animation: fadeText 2s ease forwards 2s;
+        }
+
+            .btn:hover {
+                background-color: #1b5e20;
+                transform: scale(1.05);
+            }
+
+        footer {
+            margin-top: 80px;
+            padding: 20px;
+            font-size: 14px;
+            color: #555;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        for (let i = 0; i < 20; i++) {
+            const circle = document.createElement('div');
+            const size = Math.random() * 100 + 30;
+            circle.classList.add('circle');
+            circle.style.width = `${size}px`;
+            circle.style.height = `${size}px`;
+            circle.style.left = `${Math.random() * 100}%`;
+            circle.style.animationDuration = `${15 + Math.random() * 10}s`;
+            circle.style.animationDelay = `${Math.random() * 10}s`;
+            document.body.appendChild(circle);
+        }
+    </script>
+
+    <header>
+        <img src="images/logo.jpg" alt="Логотип Дворик" />
+        <h1>Магазин «Дворик»</h1>
+        <p>Всё для дома, 🌿</p>
+        <button class="btn" onclick="window.location.href='catalog.html'">Перейти в каталог</button>
+    </header>
+
+    <footer>© 2025 Магазин «Дворик». Все права защищены.</footer>
+    <script>
+        if (!localStorage.getItem("loggedIn")) {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿
+body {
+    font-family: "Segoe UI", sans-serif;
+    color: #2e7d32;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient( to bottom, rgba(255,255,255,0.7) 0%, /* лёгкое размытие сверху */
+    rgba(255,255,255,0.9) 40%, /* почти белый к середине */
+    white 80%, /* переход в белый */
+    white 100% /* низ полностью белый */
+    ), url('XXL_height.jpg') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
